@@ -1,0 +1,14 @@
+---
+# aqua - Declarative CLI Version Manager
+# https://aquaproj.github.io/
+# checksum:
+#   enabled: true
+#   require_checksum: true
+#   supported_envs:
+#   - all
+registries:
+- type: standard
+  ref: v4.219.0 # renovate: depName=aquaproj/aqua-registry
+packages:
+- name: pre-commit/pre-commit@v3.8.0
+- name: golang/go@go1.23.0
