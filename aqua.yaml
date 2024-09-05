@@ -13,3 +13,4 @@ packages:
 - name: pre-commit/pre-commit@v3.8.0
 - name: golang/go@go1.23.0
 - name: getsops/sops@v3.9.0
+- name: nodejs/node@v20.17.0
