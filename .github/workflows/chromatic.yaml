@@ -9,16 +9,15 @@ jobs:
   chromatic:
     name: Run Chromatic
     runs-on: ubuntu-latest
+    workingDir: frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          workingDir: frontend
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          workingDir: frontend
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
         run: npm install --prefix frontend
@@ -26,4 +25,3 @@ jobs:
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDir: frontend
