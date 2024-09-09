@@ -9,7 +9,9 @@ jobs:
   chromatic:
     name: Run Chromatic
     runs-on: ubuntu-latest
-    workingDir: frontend
+    defaults:
+      runs:
+        working-directory: frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,7 +22,7 @@ jobs:
           node-version: 20
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
-        run: npm install --prefix frontend
+        run: npm install
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
