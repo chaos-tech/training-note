@@ -1,7 +1,14 @@
-export const LineButton = () => {
+type Props = {
+  handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
+export const LineButton = ({ handleClick }: Props) => {
   return (
     <>
-      <button className="text-primary-white group w-full cursor-pointer rounded bg-line-default">
+      <button
+        className="text-primary-white group w-full cursor-pointer rounded bg-line-default"
+        onClick={handleClick}
+      >
         <div className="hover:bg-primary-black active:bg-primary-black flex items-center rounded hover:bg-opacity-10 active:bg-opacity-30">
           <div className="border-opacity-light border-primary-black flex w-11 justify-center border-r-2 py-2">
             <svg
