@@ -16,6 +16,9 @@ const config: Config = {
         black: '#000000',
       },
     },
+    borderOpacity: {
+      light: '0.08',
+    },
   },
   plugins: [],
 };
