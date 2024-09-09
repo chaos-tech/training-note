@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euCo pipefail
+
+cd "$(dirname "$0")/.."
+
+cp .env.sample .env
+direnv allow
+
+aqua i
+pre-commit install
+api/script/setup
+frontend/script/setup
+infra/script/setup
