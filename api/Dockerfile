@@ -9,8 +9,8 @@ RUN --mount=type=cache,target=/go/pkg/mod/,sharing=locked \
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
     --mount=type=bind,target=. \
-    go build -o /bin/server
+    CGO_ENABLED=0 GOOS=linux go build -o /bin/server
 
-FROM gcr.io/distroless/base-nossl-debian12
+FROM gcr.io/distroless/static-debian12
 COPY --from=builder /bin/server /server
 CMD ["/server"]
