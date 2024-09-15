@@ -1,11 +1,14 @@
 'use client';
 import liff from '@line/liff';
 import { useEffect } from 'react';
+import config from '@/configs';
 
 export const useLine = () => {
+  const { LIFF_ID } = config;
+
   useEffect(() => {
     try {
-      liff.init({ liffId: '2006306110-dVP1PYQQ' });
+      liff.init({ liffId: LIFF_ID });
     } catch (e) {
       console.log(e);
     }

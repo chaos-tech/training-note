@@ -2,13 +2,16 @@
 import liff from '@line/liff';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
+import config from '@/configs';
 
 const SignInComplete = () => {
+  const { LIFF_ID } = config;
+
   const getProfile = async () => {
-    localStorage.removeItem('LIFF_STORE:2006306110-dVP1PYQQ:accessToken');
-    localStorage.removeItem('LIFF_STORE:2006306110-dVP1PYQQ:clientId');
-    localStorage.removeItem('LIFF_STORE:2006306110-dVP1PYQQ:context');
-    localStorage.removeItem('LIFF_STORE:2006306110-dVP1PYQQ:accessToken');
+    localStorage.removeItem(`LIFF_STORE:${LIFF_ID}:accessToken`);
+    localStorage.removeItem(`LIFF_STORE:${LIFF_ID}:clientId`);
+    localStorage.removeItem(`LIFF_STORE:${LIFF_ID}:context`);
+    localStorage.removeItem(`LIFF_STORE:${LIFF_ID}:accessToken`);
 
     try {
       await liff.init({ liffId: '2006306110-dVP1PYQQ' });
