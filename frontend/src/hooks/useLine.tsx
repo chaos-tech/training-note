@@ -19,13 +19,5 @@ export const useLine = () => {
     }
   };
 
-  const getProfile = async () => {
-    try {
-      const profile = await liff.getProfile();
-      return profile;
-    } catch (e) {
-      console.error(e);
-    }
-  };
-  return { signIn, getProfile };
+  return { signIn };
 };
