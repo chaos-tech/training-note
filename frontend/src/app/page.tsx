@@ -1,10 +1,14 @@
+'use client';
+import { Calendar, CheckList, Header } from '@/features/Top/components';
+
 export default function Home() {
   return (
-    <main className="row-span-4 grid min-h-screen items-center justify-center p-4">
-      <div className="topBar">topBar</div>
-      <div className="scrollDays">scrollDays</div>
-      <div className="checkList">checkList</div>
-      <div className="bottomBar">bottomBar</div>
+    <main className="flex h-screen flex-col items-center p-4">
+      <div className="w-full">
+        <Header />
+        <Calendar />
+        <CheckList />
+      </div>
     </main>
   );
 }
