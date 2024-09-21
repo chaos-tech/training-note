@@ -1,4 +1,4 @@
-type TrainingMenuItemProps = {
+export type TrainingMenuItemProps = {
   id: number;
   name: string; // メニュー名
   weight: number; // 1セットの重さ
@@ -6,6 +6,11 @@ type TrainingMenuItemProps = {
   set: number; // セット回数
   comment: string; // 備考欄
 };
+
+export type CheckItemProps = Pick<
+  TrainingMenuItemProps,
+  'name' | 'weight' | 'reps' | 'set'
+>;
 
 export const trainingMenuMock: TrainingMenuItemProps[] = [
   {
