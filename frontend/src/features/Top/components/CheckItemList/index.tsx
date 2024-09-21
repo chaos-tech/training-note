@@ -25,7 +25,7 @@ export const CheckItem = ({ name, weight, reps, set }: CheckItemProps) => {
         <li className="">
           <ul className="flex list-none gap-2">
             <li className="text-deep-gray text-sm tracking-wider">{`${weight}×${reps}×${set}`}</li>
-            <input type="checkbox" />
+            <input type="checkbox" className='accent-dark-gray scale-150 border-2 '/>
           </ul>
         </li>
       </ul>
