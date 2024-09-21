@@ -1,13 +1,13 @@
 'use client';
-import { Calendar, CheckList, Header } from '@/features/Top/components';
+import { Calendar, CheckItemList, Header } from '@/features/Top/components';
 
 export default function Home() {
   return (
-    <main className="p-4">
-      <div className="flex h-screen w-full flex-col">
+    <main>
+      <div className="flex h-screen w-full flex-col p-4">
         <Header />
         <Calendar />
-        <CheckList />
+        <CheckItemList />
       </div>
     </main>
   );

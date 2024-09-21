@@ -12,6 +12,8 @@ const config: Config = {
         black: '#000000',
         gray: '#e9e9e9',
       },
+      'light-gray': '#d1d1d1',
+      'deep-gray': '#808080',
     },
     borderOpacity: {
       light: '0.08',

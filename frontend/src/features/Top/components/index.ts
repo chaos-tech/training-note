@@ -1,3 +1,3 @@
 export { Calendar } from './Calendar';
-export { CheckList } from './CheckList';
+export { CheckItemList } from './CheckItemList';
 export { Header } from './Header';
