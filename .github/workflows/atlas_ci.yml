@@ -1,0 +1,61 @@
+name: Atlas CI
+on:
+  pull_request:
+    paths:
+      - 'db/migrations/*'
+      - 'atlas.hcl'
+permissions:
+  contents: read       # actions/checkout
+  pull-requests: write # github-comment
+jobs:
+  atlas:
+    services:
+      postgres:
+        image: postgres:16.4
+        env:
+          POSTGRES_DB: training_note
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    runs-on: ubuntu-latest
+    env:
+      ATLAS_ENV: gen
+      GITHUB_TOKEN: ${{ github.token }}
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: password
+      DB_NAME: training_note
+      DB_SSLMODE: disable
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0
+      - run: git branch main origin/main
+      # TODO
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 # v3.2.0
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+      - name: Setup github-comment
+        run: |
+          wget https://github.com/suzuki-shunsuke/github-comment/releases/download/v${{ env.GITHUB_COMMENT_VERSION }}/github-comment_${{ env.GITHUB_COMMENT_VERSION }}_linux_amd64.tar.gz
+          tar -vxf ./github-comment_${{ env.GITHUB_COMMENT_VERSION }}_linux_amd64.tar.gz github-comment
+          sudo mv github-comment /usr/bin
+        env:
+          GITHUB_COMMENT_VERSION: 6.1.0
+      - uses: ariga/setup-atlas@d52cd13fed38eca914fa57071155a4644fd6f820 # v0.2
+      - name: atlas migrate lint
+        run: |
+          github-comment hide
+          github-comment exec -- atlas migrate lint --env ${{ env.ATLAS_ENV }} --git-base ${{ github.base_ref }}
+      - name: atlas migrate validate
+        run: |
+          github-comment hide
+          github-comment exec -- atlas migrate validate --env ${{ env.ATLAS_ENV }}
