@@ -1,32 +1,41 @@
 package main
 
 import (
-	"net/http"
+	"fmt"
+	"log"
+	"net"
+	"os"
+	"os/signal"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/health"
+	healthpb "google.golang.org/grpc/health/grpc_health_v1"
+	"google.golang.org/grpc/reflection"
 )
 
-type ResponseData struct {
-	Status  int    `json:"status"`
-	Message string `json:"message"`
-}
-
 func main() {
-	e := echo.New()
-
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
-	e.GET("/healthz", health)
-
-	e.Logger.Fatal(e.Start(":1323"))
-}
-
-func health(c echo.Context) error {
-	data := ResponseData{
-		Status:  200,
-		Message: "ok",
+	port := 8080
+	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
+	if err != nil {
+		panic(err)
 	}
-	return c.JSON(http.StatusOK, data)
+
+	s := grpc.NewServer()
+
+	healthSrv := health.NewServer()
+	healthpb.RegisterHealthServer(s, healthSrv)
+	healthSrv.SetServingStatus("healthz", healthpb.HealthCheckResponse_SERVING)
+
+	reflection.Register(s)
+
+	go func() {
+		log.Printf("start gRPC server port: %v", port)
+		s.Serve(listener)
+	}()
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt)
+	<-quit
+	log.Println("stopping gRPC server...")
+	s.GracefulStop()
 }
