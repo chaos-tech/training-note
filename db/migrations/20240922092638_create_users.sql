@@ -1,6 +1,6 @@
 -- Create "users" table
 CREATE TABLE "users" (
-  "id" bigint NOT NULL,
+  "id" bigint NOT NULL GENERATED ALWAYS AS IDENTITY,
   "uid" character varying(255) NOT NULL,
   "name" character varying(255) NOT NULL,
   "nickname" character varying(255) NOT NULL,
