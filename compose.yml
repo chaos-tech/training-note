@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16.4
+    environment:
+      POSTGRES_DB: training_note
+      POSTGRES_PASSWORD: password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d training_note || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 5s
+    ports:
+      - "127.0.0.1:5432:5432"
