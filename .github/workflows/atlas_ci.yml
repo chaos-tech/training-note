@@ -43,14 +43,9 @@ jobs:
       #   with:
       #     username: ${{ secrets.DOCKERHUB_USERNAME }}
       #     password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-      - name: Setup github-comment
-        run: |
-          wget https://github.com/suzuki-shunsuke/github-comment/releases/download/v${{ env.GITHUB_COMMENT_VERSION }}/github-comment_${{ env.GITHUB_COMMENT_VERSION }}_linux_amd64.tar.gz
-          tar -vxf ./github-comment_${{ env.GITHUB_COMMENT_VERSION }}_linux_amd64.tar.gz github-comment
-          sudo mv github-comment /usr/bin
-        env:
-          GITHUB_COMMENT_VERSION: 6.1.0
-      - uses: ariga/setup-atlas@d52cd13fed38eca914fa57071155a4644fd6f820 # v0.2
+      - uses: aquaproj/aqua-installer@17bae6fde43b710e28a1651c37c7b85fc48fe7ab # v0.6.0
+        with:
+          aqua_version: v2.29.0
       - name: atlas migrate lint
         run: |
           github-comment hide
