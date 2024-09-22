@@ -1,0 +1,35 @@
+name: Atlas CD (DB Migration)
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        description: 'Environment(production|staging)'
+        required: true
+        default: staging
+
+permissions:
+  contents: read # actions/chekout
+jobs:
+  atlas:
+    # TODO: This workflow must be executed in a network where the Github Actions can access the database.
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    env:
+      ATLAS_ENV: gen
+      GITHUB_TOKEN: ${{ github.token }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASS: ${{ secrets.DB_PASS }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_SSLMODE: ${{ secrets.DB_SSLMODE }}
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ariga/setup-atlas@d52cd13fed38eca914fa57071155a4644fd6f820 # v0.2
+      - name: atlas status
+        run: atlas migrate status --env ${{ env.ATLAS_ENV }}
+      - name: atlas apply dry-run
+        run: atlas migrate apply --dry-run --env ${{ env.ATLAS_ENV }}
+      - name: atlas apply
+        run: atlas migrate apply --env ${{ env.ATLAS_ENV }}
