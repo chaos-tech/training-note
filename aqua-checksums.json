@@ -1,0 +1,114 @@
+{
+  "checksums": [
+    {
+      "id": "github_release/github.com/getsops/sops/v3.9.0/sops-v3.9.0.darwin.amd64",
+      "checksum": "25457955DF3BD602B4FC15620D4574E79FBB554ADA0211E85C6ACA6EEE2BA3EA",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/getsops/sops/v3.9.0/sops-v3.9.0.darwin.arm64",
+      "checksum": "72F9D59B825A20AC0019F370C18B3265608B1B0A271BC052F6007C45B95212FD",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/getsops/sops/v3.9.0/sops-v3.9.0.exe",
+      "checksum": "2B45084E9E6308FA465EEAC2419D497B5B16B66D332AF18C03FEB3D68E51F52F",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/getsops/sops/v3.9.0/sops-v3.9.0.linux.amd64",
+      "checksum": "0D65660FBE785647FF4F1764D7F69EDF598F79D6D79EBBEF4A501909B6FF6B82",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/getsops/sops/v3.9.0/sops-v3.9.0.linux.arm64",
+      "checksum": "596F26DE6D4F7D1CC44F9E27BFEA3192EF77F810F31F3F4132A417860AB91EBC",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/pre-commit/pre-commit/v3.8.0/pre-commit-3.8.0.pyz",
+      "checksum": "B312004805AEA01A9A84ADBD1D5D8415CD4B1F7217045453547A5723C3E6F873",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/golang.org/dl/go1.23.0.darwin-amd64.tar.gz",
+      "checksum": "FFD070ACF59F054E8691B838F274D540572DB0BD09654AF851E4E76AB88403DC",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/golang.org/dl/go1.23.0.darwin-arm64.tar.gz",
+      "checksum": "B770812AEF17D7B2EA406588E2B97689E9557AAC7E646FE76218B216E2C51406",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/golang.org/dl/go1.23.0.linux-amd64.tar.gz",
+      "checksum": "905A297F19EAD44780548933E0FF1A1B86E8327BB459E92F9C0012569F76F5E3",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/golang.org/dl/go1.23.0.linux-arm64.tar.gz",
+      "checksum": "62788056693009BCF7020EEDC778CDD1781941C6145EAB7688BD087BCE0F8659",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/golang.org/dl/go1.23.0.windows-amd64.zip",
+      "checksum": "D4BE481EF73079EE0AD46081D278923AA3FD78DB1B3CF147172592F73E14C1AC",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/golang.org/dl/go1.23.0.windows-arm64.zip",
+      "checksum": "0BE62073EF8F5A2D3B9ADCEFDDF18C417DAB0A7975C71488AC2694856E2FF976",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/nodejs.org/dist/v20.17.0/node-v20.17.0-darwin-arm64.tar.gz",
+      "checksum": "476324108C4361935465631EEC47DF1C943BA2C87BC050853385B1D1C71F0B1F",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/nodejs.org/dist/v20.17.0/node-v20.17.0-darwin-x64.tar.gz",
+      "checksum": "EEFE9447DBB0B5B233D42730989C6C364487DE4043145DB2F63DA94E9623C380",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/nodejs.org/dist/v20.17.0/node-v20.17.0-linux-arm64.tar.gz",
+      "checksum": "18AFBF2781EDFCC9918343F4BF74A8C35D74D778B85D40A0C09B232ADC0EA82C",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/nodejs.org/dist/v20.17.0/node-v20.17.0-linux-x64.tar.gz",
+      "checksum": "21E656F6F4E34080DDC5D75FBFE58CE8482FE6E70A76AEAE14AFDCDC1E23079D",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/nodejs.org/dist/v20.17.0/node-v20.17.0-win-x64.zip",
+      "checksum": "E323FFF0ABA197090FAABD29C4C23F334557FF24454324F0C83FAA7E399DBB74",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/release.ariga.io/atlas/atlas-darwin-amd64-v0.27.0",
+      "checksum": "2B01C6CE96C2CB3B9655EAE87CF85EEA8A524A6DE2502E67DF4F8E7978939741",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/release.ariga.io/atlas/atlas-darwin-arm64-v0.27.0",
+      "checksum": "E9EBDE609B4B1BF393F6507D07B571017C1B24D773716BF3C1CFAC652D458D18",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/release.ariga.io/atlas/atlas-linux-amd64-v0.27.0",
+      "checksum": "E33D41173E548059E86C859D24102467A339D6F11BF8DABB541CAB923738F2A0",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "http/release.ariga.io/atlas/atlas-linux-arm64-v0.27.0",
+      "checksum": "3227734B9F05064F4EEB09BD7A15D1D42DD3ED64023A8755E7449AEF793CDDFD",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "registries/github_content/github.com/aquaproj/aqua-registry/v4.219.0/registry.yaml",
+      "checksum": "16B8DC8967FBEC6F7E7B9205393DE8A06A49438373B71767FB73753F137D04DE",
+      "algorithm": "sha256"
+    }
+  ]
+}
