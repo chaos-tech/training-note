@@ -40,7 +40,7 @@ func main() {
 	}()
 
 	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(quit, os.Interrupt, os.Kill, syscall.SIGTERM)
 	<-quit
 	log.Println("stopping gRPC server...")
 	s.shutdown(30 * time.Second)
