@@ -14,3 +14,5 @@ packages:
 - name: golang/go@go1.23.0
 - name: getsops/sops@v3.9.0
 - name: nodejs/node@v20.17.0
+- name: ariga/atlas@v0.27.0
+- name: suzuki-shunsuke/github-comment@v6.2.0
