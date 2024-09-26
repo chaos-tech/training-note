@@ -1,0 +1,62 @@
+name: Atlas CI
+on:
+  pull_request:
+    paths:
+      - 'db/migrations/*'
+      - 'atlas.hcl'
+permissions:
+  contents: read       # actions/checkout
+  pull-requests: write # github-comment
+jobs:
+  atlas:
+    services:
+      postgres:
+        image: postgres:16.4
+        env:
+          POSTGRES_DB: training_note
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    runs-on: ubuntu-latest
+    env:
+      ATLAS_ENV: gen
+      GITHUB_TOKEN: ${{ github.token }}
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: password
+      DB_NAME: training_note
+      DB_SSLMODE: disable
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0
+      - run: git branch main origin/main
+      # TODO
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 # v3.2.0
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+      - uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        with:
+          path: ~/.local/share/aquaproj-aqua
+          key: v1-aqua-installer-${{runner.os}}-${{runner.arch}}-${{hashFiles('aqua.yaml')}}
+          restore-keys: |
+            v1-aqua-installer-${{runner.os}}-${{runner.arch}}-
+      - uses: aquaproj/aqua-installer@6ce1f8848ec8e61f14d57bd5d7597057a6dd187c # v3.0.1
+        with:
+          aqua_version: v2.29.0
+      - name: atlas migrate lint
+        run: |
+          github-comment hide
+          github-comment exec -- atlas migrate lint --env ${{ env.ATLAS_ENV }} --git-base ${{ github.base_ref }}
+      - name: atlas migrate validate
+        run: |
+          github-comment hide
+          github-comment exec -- atlas migrate validate --env ${{ env.ATLAS_ENV }}
