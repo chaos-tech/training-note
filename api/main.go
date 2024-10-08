@@ -1,65 +1,32 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net"
-	"os"
-	"os/signal"
-	"syscall"
-	"time"
+	"net/http"
 
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/health"
-	healthpb "google.golang.org/grpc/health/grpc_health_v1"
-	"google.golang.org/grpc/reflection"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
-type Server struct {
-	*grpc.Server
+type ResponseData struct {
+	Status  int    `json:"status"`
+	Message string `json:"message"`
 }
 
 func main() {
-	port := 8080
-	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
-	if err != nil {
-		panic(err)
-	}
+	e := echo.New()
 
-	s := &Server{grpc.NewServer()}
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
-	healthSrv := health.NewServer()
-	healthpb.RegisterHealthServer(s, healthSrv)
-	healthSrv.SetServingStatus("healthz", healthpb.HealthCheckResponse_SERVING)
+	e.GET("/healthz", health)
 
-	reflection.Register(s)
-
-	go func() {
-		log.Printf("start gRPC server port: %v", port)
-		s.Serve(listener)
-	}()
-
-	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, os.Interrupt, os.Kill, syscall.SIGTERM)
-	<-quit
-	log.Println("stopping gRPC server...")
-	s.shutdown(30 * time.Second)
+	e.Logger.Fatal(e.Start(":1323"))
 }
 
-func (s *Server) shutdown(d time.Duration) {
-	stopChan := make(chan bool, 1)
-
-	go func() {
-		s.GracefulStop()
-		stopChan <- true
-	}()
-
-	t := time.NewTimer(d)
-	select {
-	case <-stopChan:
-		log.Println("graceful shutdown completed.")
-	case <-t.C:
-		log.Println("graceful shutdown failed timeout.")
-		s.Stop()
+func health(c echo.Context) error {
+	data := ResponseData{
+		Status:  200,
+		Message: "ok",
 	}
+	return c.JSON(http.StatusOK, data)
 }
